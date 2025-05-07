@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-class THREEController {
+export class THREEController {
 
     private static instance: THREEController | null = null;
 
@@ -21,7 +21,7 @@ class THREEController {
         return this.instance;
     }
 
-    private constructor(mainContainer: HTMLElement) { // constructs renderer, scene
+    public constructor(mainContainer: HTMLElement) { // constructs renderer, scene
         this.setMainContainer(mainContainer);
         this.setMCWidth(mainContainer.offsetWidth);
         this.setMCHeight(mainContainer.offsetHeight);
