@@ -51,10 +51,8 @@ export class THREEController {
         this.mcHeight = height;
     }
 
-    private mcAppendChild(element: HTMLElement | undefined)
-    {
-        if (element && this.getMainContainer())
-        {
+    private mcAppendChild(element: HTMLElement | undefined) {
+        if (element && this.getMainContainer()) {
             this.getMainContainer()?.appendChild(element);
         }
     }
@@ -75,15 +73,12 @@ export class THREEController {
         return this.mcRenderer;
     }
 
-    private getMCRendererDomElement(): HTMLElement | undefined
-    {
+    private getMCRendererDomElement(): HTMLElement | undefined {
         return this.getMCRenderer()?.domElement;
     }
 
-    private mcRendererRender() 
-    {
-        if (this.getMCRenderer() && this.mcScene && this.mcCamera)
-        {
+    private mcRendererRender() {
+        if (this.getMCRenderer() && this.mcScene && this.mcCamera) {
             this.getMCRenderer()?.render(this.mcScene, this.mcCamera);
         }
     }
