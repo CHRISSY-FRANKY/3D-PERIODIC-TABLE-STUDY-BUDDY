@@ -12,19 +12,22 @@ class THREEController {
 
     private mcScene: THREE.Scene | undefined;
 
-    public static getInstance(mainContainer: HTMLElement): THREEController {
+    public static getInstance(mainContainer: HTMLElement): THREEController { // get singleton instance
         if (!this.instance) {
             this.instance = new THREEController(mainContainer);
         }
         return this.instance;
     }
 
-    private constructor(mainContainer: HTMLElement) {
+    private constructor(mainContainer: HTMLElement) { // constructs renderer, scene
         this.setMainContainer(mainContainer);
         this.setMCWidth(mainContainer.offsetWidth);
         this.setMCHeight(mainContainer.offsetHeight);
         this.setMCRenderer(new THREE.WebGLRenderer());
+        this.getMCRenderer()?.setSize(this.getMCWidth() ?? 0, this.getMCHeight() ?? 0);
         this.setMCScene(new THREE.Scene());
+        this.setMCSceneBackgroundColor(new THREE.Color(THREE.Color.NAMES.red));
+
     }
 
     private setMainContainer(mainContainer: HTMLElement): void {
@@ -65,5 +68,11 @@ class THREEController {
 
     private getMCScene(): THREE.Scene | undefined {
         return this.mcScene;
+    }
+
+    private setMCSceneBackgroundColor(backgroundColor: THREE.Color): void {
+        if (this.mcScene && backgroundColor) {
+            this.mcScene.background = backgroundColor;
+        }
     }
 }
