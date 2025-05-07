@@ -29,7 +29,10 @@ class THREEController {
         this.getMCRenderer()?.setSize(this.getMCWidth() ?? 0, this.getMCHeight() ?? 0);
         this.setMCScene(new THREE.Scene());
         this.setMCSceneBackgroundColor(new THREE.Color(THREE.Color.NAMES.red));
-        this.setMCCamera(new THREE.PerspectiveCamera(75, (this.getMCWidth() ?? 0) / (this.getMCHeight() ?? 1), 0.1, 100))
+        this.setMCCamera(new THREE.PerspectiveCamera(75, (this.getMCWidth() ?? 0) / (this.getMCHeight() ?? 1), 0.1, 100));
+
+        this.mcAppendChild(this.getMCRendererDomElement())
+        this.mcRendererRender();
     }
 
     private setMainContainer(mainContainer: HTMLElement): void {
@@ -48,6 +51,14 @@ class THREEController {
         this.mcHeight = height;
     }
 
+    private mcAppendChild(element: HTMLElement | undefined)
+    {
+        if (element && this.getMainContainer())
+        {
+            this.getMainContainer()?.appendChild(element);
+        }
+    }
+
     private getMCWidth(): number | undefined {
         return this.mcWidth;
     }
@@ -62,6 +73,19 @@ class THREEController {
 
     private getMCRenderer(): THREE.WebGLRenderer | undefined {
         return this.mcRenderer;
+    }
+
+    private getMCRendererDomElement(): HTMLElement | undefined
+    {
+        return this.getMCRenderer()?.domElement;
+    }
+
+    private mcRendererRender() 
+    {
+        if (this.getMCRenderer() && this.mcScene && this.mcCamera)
+        {
+            this.getMCRenderer()?.render(this.mcScene, this.mcCamera);
+        }
     }
 
     private setMCScene(scene: THREE.Scene) {
