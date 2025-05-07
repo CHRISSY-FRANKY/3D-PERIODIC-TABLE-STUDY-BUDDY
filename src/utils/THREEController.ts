@@ -23,7 +23,7 @@ class THREEController {
     this.mainContainer = mainContainer;
   }
 
-  private getMainContainer(): HTMLElement {
+  private getMainContainer(): HTMLElement | undefined{
     return this.mainContainer;
   }
 
