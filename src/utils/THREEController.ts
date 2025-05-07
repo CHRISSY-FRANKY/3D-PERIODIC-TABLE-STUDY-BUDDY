@@ -12,6 +12,8 @@ class THREEController {
 
     private mcScene: THREE.Scene | undefined;
 
+    private mcCamera: THREE.PerspectiveCamera | undefined;
+
     public static getInstance(mainContainer: HTMLElement): THREEController { // get singleton instance
         if (!this.instance) {
             this.instance = new THREEController(mainContainer);
@@ -27,7 +29,7 @@ class THREEController {
         this.getMCRenderer()?.setSize(this.getMCWidth() ?? 0, this.getMCHeight() ?? 0);
         this.setMCScene(new THREE.Scene());
         this.setMCSceneBackgroundColor(new THREE.Color(THREE.Color.NAMES.red));
-
+        this.setMCCamera(new THREE.PerspectiveCamera(75, (this.getMCWidth() ?? 0) / (this.getMCHeight() ?? 1), 0.1, 100))
     }
 
     private setMainContainer(mainContainer: HTMLElement): void {
@@ -74,5 +76,13 @@ class THREEController {
         if (this.mcScene && backgroundColor) {
             this.mcScene.background = backgroundColor;
         }
+    }
+
+    private setMCCamera(camera: THREE.PerspectiveCamera): void {
+        this.mcCamera = camera;
+    }
+
+    private getMCCamera(): THREE.PerspectiveCamera | undefined {
+        return this.mcCamera;
     }
 }
