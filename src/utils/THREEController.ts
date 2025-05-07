@@ -4,6 +4,8 @@ class THREEController
 {
     private static instance:THREEController | null = null;
     private mainContainer: HTMLElement;
+    private mcWidth:number;
+    private mcHeight:number;
     
 
     public static getInstance(mainContainer: HTMLElement): THREEController
@@ -18,5 +20,12 @@ class THREEController
     private constructor(mainContainer: HTMLElement)
     {
         this.mainContainer = mainContainer;
+        this.mcWidth = mainContainer.offsetWidth;
+        this.mcHeight = mainContainer.offsetHeight;
+    }
+
+    private getMainContainer(): HTMLElement
+    {
+        return this.mainContainer;
     }
 }
